@@ -20,35 +20,12 @@ const PersonagemType = new GraphQLObjectType({
             type: new GraphQLList(EpisodioType),
             resolve(parent, args){
                 return axios.get('https://rickandmortyapi.com/api/episode')
-                .then(res => res.data);
+                .then(res => res.data.results);
             }
          },
         url: { type: GraphQLString },
-
     })
 });
-
-// //Lista de Personagens
-// const PersonagemListaType = new GraphQLObjectType({
-//     name: 'CharacterList',
-//     fields: () => ({
-//         info: {
-//             count: { type: GraphQLInt },
-//             pages:  { type: GraphQLInt },
-//             next:  { type: GraphQLString },
-//             prev:  { type: GraphQLString }
-//     },
-//         results: {
-//             type: new GraphQLList(PersonagemType),
-//             resolve(parent, args){
-//                 return axios.get('https://rickandmortyapi.com/api/character/1,35')
-//                 .then(res => res.data);
-//             }
-//          }
-//     })
-// });
-
-
 
 
 //Episodios
@@ -61,8 +38,8 @@ const EpisodioType = new GraphQLObjectType({
         characters: {
             type: new GraphQLList(PersonagemType),
             resolve(parent, args) {
-                return axios.get('????')
-                .then(res => res.data);
+                return axios.get('https://rickandmortyapi.com/api/episode')
+                .then(res => res.data.results);
             }
         },
         url: { type: GraphQLString },
@@ -97,8 +74,8 @@ const RootQuery = new GraphQLObjectType ({
         characters: {
             type: new GraphQLList(PersonagemType),
             resolve(parent, args) {
-                return axios.get('????') 
-                .then(res => res.data);
+                return axios.get('https://rickandmortyapi.com/api/character') 
+                .then(res => res.data.results);
             }
         },
         character: {
@@ -114,8 +91,8 @@ const RootQuery = new GraphQLObjectType ({
         episode: {
             type: new GraphQLList(EpisodioType),
             resolve(parent, args) {
-                return axios.get('????') 
-                .then(res => res.data);
+                return axios.get('https://rickandmortyapi.com/api/episode') 
+                .then(res => res.data.results);
             }
         },
         episodes: {

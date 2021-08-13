@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+import { Query } from '@apollo/client/react/components';
+
 
 const PERSONAGENS_QUERY = gql`
     query PersonagensQuery{
-        personagens {
+        Character {
             id
             name
             origin
@@ -20,7 +21,18 @@ export class Personagens extends Component {
     render() {
         return (
             <div>
-                <h1 classname="display-4 my-3"> Personagens </h1>
+                <h1 className="display-4 my-3"> Personagens </h1>
+
+                <Query query={PERSONAGENS_QUERY}>
+                    {({ loading, error, data }) => {
+                        if (loading) return <h4> Carregando... </h4>;
+                        if (error) console.log(error);
+                        console.log(data);
+
+                        return <h1> Teste </h1>;
+                    }}
+                </Query>
+
             </div>
         )
     }
